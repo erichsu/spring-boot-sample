@@ -25,6 +25,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "hotels", path = "hotels")
 interface HotelRepository extends PagingAndSortingRepository<Hotel, Long> {
 
-	Hotel findByCityAndName(City city, String name);
+	Hotel findByCity(City city);
 
 }

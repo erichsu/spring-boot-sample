@@ -41,4 +41,9 @@ public class CitySearchCriteriaTemp implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String findBugsTest() {
+		String test = null;
+		return test.toUpperCase();
+	}
 }

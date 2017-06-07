@@ -27,6 +27,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import sample.data.rest.domain.Hotel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -38,38 +39,35 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(SampleDataRestApplication.class)
-public class CityRepositoryIntegrationTests {
+public class HotelRepositoryIntegrationTests {
 
-	@Autowired
-	CityRepository repository;
+    @Autowired
+    HotelRepository repository;
+    @Autowired
+    CityRepository cityRepository;
 
-	@BeforeClass
-	public static void setUpClass() {
-		System.out.println("=== city setup ===");
-	}
+    @BeforeClass
+    public static void setUpClass() {
+        System.out.println("=== Hotel setup ===");
+    }
 
-	@Test
-	public void findsFirstPageOfCities() {
-		System.out.println("=== city findsFirstPageOfCities ===");
-		Page<City> cities = this.repository.findAll(new PageRequest(0, 10));
-		assertThat(cities.getTotalElements()).isGreaterThan(20L);
-	}
 
-	@Test
-	public void findByNameAndCountry() {
-		System.out.println("=== city findByNameAndCountry ===");
-		City city = this.repository.findByNameAndCountryAllIgnoringCase("Melbourne",
-				"Australia");
-		assertThat(city).isNotNull();
-		assertThat(city.getName()).isEqualTo("Melbourne");
-	}
+    @Test
+    public void findsFirstPageOfCities() {
+        System.out.println("=== hotal findsFirstPageOfCities ===");
+        Page<Hotel> hotels = this.repository.findAll(new PageRequest(0, 10));
+        assertThat(hotels.getTotalElements()).isGreaterThan(20L);
+    }
 
-	@Test
-	public void findContaining() {
-		System.out.println("=== city findContaining ===");
-		Page<City> cities = this.repository
-				.findByNameContainingAndCountryContainingAllIgnoringCase("", "UK",
-						new PageRequest(0, 10));
-		assertThat(cities.getTotalElements()).isEqualTo(3L);
-	}
+    @Test
+    public void findByCity() {
+        System.out.println("=== hotal findByCity ===");
+        City city = cityRepository.findByNameAndCountryAllIgnoringCase("Melbourne",
+                "Australia");
+        Hotel hotel = this.repository.findByCity(city);
+        assertThat(hotel).isNotNull();
+        assertThat(hotel.getName()).isEqualTo("The Langham");
+    }
+
+
 }

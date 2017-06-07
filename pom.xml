@@ -24,6 +24,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160212</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
@@ -112,6 +118,24 @@
 						</execution>
 				 </executions>
 			</plugin>
+
+			<plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>findbugs-maven-plugin</artifactId>
+          <version>3.0.1</version>
+          <executions>
+              <execution>
+                  <goals>
+                      <goal>check</goal>
+                  </goals>
+              </execution>
+          </executions>
+          <configuration>
+              <effort>Max</effort><!--檢測的程度，值可為Min、Default或是Max-->
+              <xmlOutput>true</xmlOutput>
+							<failOnError>false</failOnError>
+          </configuration>
+      </plugin>
 		</plugins>
 	</build>
 
